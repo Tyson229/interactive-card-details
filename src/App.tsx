@@ -1,35 +1,32 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import "./App.css";
+import CardContainer from "./components/CardContainer/CardContainer";
+import Container from "./components/Container/Container";
+import Form from "./components/Form/Form";
+import FormContext from "./context/FormContext";
+import SubmitContext from "./context/SubmitContext";
+import { useFormStates } from "./hooks/useFormStates";
+import ConfirmPage from "./components/ConfirmPage/ConfirmPage";
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const { formState, handleFormStateChange } = useFormStates({
+    name: "",
+    number: "",
+    month: "",
+    year: "",
+    cvc: "",
+  });
+  const [confirm, setConfirm] = useState(false);
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Container>
+      <FormContext.Provider value={{ formState, handleFormStateChange }}>
+        <CardContainer />
+        <SubmitContext.Provider value={{ confirm, setConfirm }}>
+          {confirm ? <ConfirmPage /> : <Form />}
+        </SubmitContext.Provider>
+      </FormContext.Provider>
+    </Container>
+  );
 }
 
-export default App
+export default App;

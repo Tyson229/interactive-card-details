@@ -1,0 +1,114 @@
+.card-container {
+  // Variables
+  --padding: 1rem;
+  --font-size-small: clamp(0.3rem, 3vw, 1rem);
+  --font-size-large: clamp(0.4rem, 4vw, 1.5rem);
+
+  height: 240px;
+
+  background-image: url("/images/bg-main-mobile.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  margin-bottom: 4rem;
+  width: 100%;
+}
+
+.front-card,
+.back-card {
+  position: absolute;
+  width: 70%;
+  max-width: fit-content;
+  color: var(--white);
+  display: grid;
+  height: fit-content;
+  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+}
+
+.card-background {
+  width: 100%;
+}
+
+// Front-card
+.front-card {
+  bottom: -2rem;
+  left: 1rem;
+  z-index: 1;
+
+  & > *:not(:first-child) {
+    position: absolute;
+  }
+
+  &--logo {
+    max-width: 18%;
+    top: 1.2rem;
+    left: var(--padding);
+  }
+
+  &--number {
+    top: 52%;
+    left: var(--padding);
+    letter-spacing: 2.2px;
+    font-size: var(--font-size-large);
+  }
+
+  &--name {
+    bottom: var(--padding);
+    font-size: var(--font-size-small);
+    text-transform: uppercase;
+    left: var(--padding);
+    letter-spacing: 1.29px;
+  }
+
+  &--expiry {
+    bottom: var(--padding);
+    font-size: var(--font-size-small);
+    right: var(--padding);
+    letter-spacing: 1.29px;
+  }
+}
+
+// Back Card
+.back-card {
+  right: 1rem;
+  top: 2rem;
+
+  &--cvc {
+    position: absolute;
+    top: 44%;
+    right: 14%;
+    font-size: var(--font-size-small);
+  }
+}
+
+@media (min-width: 600px) {
+  .card-container {
+    --padding: 1.5rem;
+  }
+}
+
+@media (min-width: 900px) {
+  .card-container {
+    background-image: url("/images/bg-main-desktop.png");
+    height: 100vh;
+    margin-bottom: 0;
+  }
+
+  .front-card,
+  .back-card {
+    width: 100%;
+  }
+
+  .front-card {
+    top: 25%;
+    bottom: unset;
+    left: unset;
+    right: -10%;
+  }
+
+  .back-card {
+    top: 46%;
+    right: -20%;
+  }
+}
